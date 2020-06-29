@@ -1,6 +1,5 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.scss";
+import styles from "./App.module.scss";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
 }
 
 function Home() {
-  return <h2>Home - Digital Broker</h2>;
+  return <h2 className={styles.heading}>Home - Digital Broker</h2>;
 }
 
 export default App;
