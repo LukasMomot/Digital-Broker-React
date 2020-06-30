@@ -1,5 +1,6 @@
 import * as React from "react";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
+import styles from "./SearchBar.module.scss";
 
 interface SearchBarProps {
   onTermChanged: (term: string) => void;
@@ -8,7 +9,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
   const [term, setTerm] = React.useState<string>("");
 
   return (
-    <InputGroup>
+    <InputGroup className={styles.searchInput}>
       <FormControl
         placeholder="Symbol..."
         aria-label="Symbol"
