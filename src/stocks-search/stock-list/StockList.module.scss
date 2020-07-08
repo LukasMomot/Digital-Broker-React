@@ -1,3 +1,11 @@
 .stockTable {
   margin-top: 50px;
 }
+
+.bsButtons {
+  text-align: center;
+  width: 170px;
+  button:last-child {
+    margin-left: 10px;
+  }
+}
