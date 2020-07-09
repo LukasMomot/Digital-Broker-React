@@ -20,3 +20,6 @@ export async function fetchMostTraded(): Promise<StockPrice[]> {
 
   return stocks;
 }
+export async function fetchStockPrice(symbol: string): Promise<StockPrice> {
+  return http<StockPrice>(`http://localhost:3001/stocks/${symbol}/price`);
+}

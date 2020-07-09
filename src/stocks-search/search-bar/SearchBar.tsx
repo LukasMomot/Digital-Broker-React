@@ -7,6 +7,13 @@ interface SearchBarProps {
 }
 const SearchBar: React.FC<SearchBarProps> = (props) => {
   const [term, setTerm] = React.useState<string>("");
+  const search = () => {
+    if (!term) {
+      return;
+    }
+    props.onTermChanged(term);
+    setTerm("");
+  };
 
   return (
     <InputGroup className={styles.searchInput}>
@@ -20,7 +27,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
         }}
       />
       <InputGroup.Append>
-        <Button onClick={() => props.onTermChanged(term)} variant="success">
+        <Button onClick={() => search()} variant="success">
           Search
         </Button>
       </InputGroup.Append>

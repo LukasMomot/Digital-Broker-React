@@ -33,7 +33,7 @@ const StockList: React.FC<IStockListProps> = (props) => {
         <tr>
           <th>Symbol</th>
           <th>Company name</th>
-          <th>Price</th>
+          <th>Price ($)</th>
           <th></th>
         </tr>
       </thead>

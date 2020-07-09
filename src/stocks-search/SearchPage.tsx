@@ -4,13 +4,18 @@ import SearchBar from "./search-bar/SearchBar";
 import StockList from "./stock-list/StockList";
 import { StockPrice } from "../businessLogic/stockPrice";
 import { useEffect, useState } from "react";
-import { fetchMostTraded } from "../businessLogic/stocksService";
+import {
+  fetchMostTraded,
+  fetchStockPrice,
+} from "../businessLogic/stocksService";
 
 const SearchPage: React.FC = () => {
   const [stocks, setStocks] = useState<StockPrice[]>([]);
 
-  const search = (symbol: string) => {
+  const search = async (symbol: string) => {
     console.log("Search will be executed for: " + symbol);
+    const stock = await fetchStockPrice(symbol);
+    setStocks([...stocks, stock]);
   };
 
   useEffect(() => {
