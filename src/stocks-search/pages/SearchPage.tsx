@@ -1,13 +1,13 @@
 import * as React from "react";
 import styles from "./SearchPage.module.scss";
-import SearchBar from "./search-bar/SearchBar";
-import StockList from "./stock-list/StockList";
-import { StockPrice } from "../businessLogic/stockPrice";
+import { StockPrice } from "../../businessLogic/stockPrice";
 import { useEffect, useState } from "react";
 import {
   fetchMostTraded,
   fetchStockPrice,
-} from "../businessLogic/stocksService";
+} from "../../businessLogic/stocksService";
+import SearchBar from "../components/search-bar/SearchBar";
+import StockList from "../components/stock-list/StockList";
 
 const SearchPage: React.FC = () => {
   const [stocks, setStocks] = useState<StockPrice[]>([]);

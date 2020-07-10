@@ -1,7 +1,7 @@
 import * as React from "react";
-import { StockPrice } from "../../businessLogic/stockPrice";
 import { Table, Button } from "react-bootstrap";
 import styles from "./StockList.module.scss";
+import { StockPrice } from "../../../businessLogic/stockPrice";
 
 interface IStockListProps {
   items: StockPrice[];
