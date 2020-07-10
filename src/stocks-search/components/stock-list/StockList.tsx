@@ -2,14 +2,23 @@ import * as React from "react";
 import { Table, Button } from "react-bootstrap";
 import styles from "./StockList.module.scss";
 import { StockPrice } from "../../../businessLogic/stockPrice";
+import { useHistory } from "react-router-dom";
 
 interface IStockListProps {
   items: StockPrice[];
 }
 
 const StockList: React.FC<IStockListProps> = (props) => {
-  const buy = (symbol: string) => console.log(`Buying stock ${symbol}`);
-  const sell = (symbol: string) => console.log(`Selling stock ${symbol}`);
+  const router = useHistory();
+
+  const buy = (symbol: string) => {
+    console.log(`Buying stock ${symbol}`);
+    router.push(`/buysell/${symbol}`);
+  };
+
+  const sell = (symbol: string) => {
+    console.log(`Selling stock ${symbol}`);
+  };
 
   const stockItems = props.items.map((stock) => (
     <tr key={stock.symbol}>
