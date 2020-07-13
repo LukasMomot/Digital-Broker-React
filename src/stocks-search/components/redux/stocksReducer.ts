@@ -9,10 +9,10 @@ export const stocskReducer: Reducer<StocksState> = (
   switch (action.type) {
     case ADD_STOCK:
       const currentAction: AddStockAction = action as any;
-      console.log(currentAction);
+      console.log(action);
       return {
         ...state,
-        userAddedStocks: [...state.userAddedStocks, currentAction.stock],
+        userAddedStocks: [...state.userAddedStocks, action.payload],
       };
 
     default:

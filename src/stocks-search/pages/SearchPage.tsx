@@ -9,7 +9,7 @@ import {
 import SearchBar from "../components/search-bar/SearchBar";
 import StockList from "../components/stock-list/StockList";
 import { useDispatch } from "react-redux";
-import { AddStockAction, ADD_STOCK } from "../components/redux/actions";
+import { addStock } from "../components/redux/actions";
 
 const SearchPage: React.FC = () => {
   const [stocks, setStocks] = useState<StockPrice[]>([]);
@@ -20,7 +20,7 @@ const SearchPage: React.FC = () => {
     const stock = await fetchStockPrice(symbol);
     setStocks([...stocks, stock]);
 
-    dispatch({ stock, type: ADD_STOCK } as AddStockAction);
+    dispatch(addStock(stock));
   };
 
   useEffect(() => {
