@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { fetchStockPrice } from "../../businessLogic/stocksService";
 import { useEffect, useState } from "react";
 import { StockPrice } from "../../businessLogic/stockPrice";
@@ -19,6 +19,7 @@ interface BuyAndSellModel {
 const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
   const { symbol } = useParams();
   const [stock, setStock] = useState<StockPrice>();
+  const router = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -30,8 +31,11 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
     },
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
+      router.push("/");
     },
   });
+
+  const onCancel = () => router.goBack();
 
   useEffect(() => {
     fetchStockPrice(symbol).then((stock) => {
@@ -129,6 +133,7 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
               className={styles.btn_cancel}
               variant="danger"
               type="button"
+              onClick={onCancel}
             >
               Cancel
             </Button>
