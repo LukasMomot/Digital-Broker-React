@@ -8,14 +8,19 @@ import {
 } from "../../businessLogic/stocksService";
 import SearchBar from "../components/search-bar/SearchBar";
 import StockList from "../components/stock-list/StockList";
+import { useDispatch } from "react-redux";
+import { AddStockAction, ADD_STOCK } from "../components/redux/actions";
 
 const SearchPage: React.FC = () => {
   const [stocks, setStocks] = useState<StockPrice[]>([]);
+  const dispatch = useDispatch();
 
   const search = async (symbol: string) => {
     console.log("Search will be executed for: " + symbol);
     const stock = await fetchStockPrice(symbol);
     setStocks([...stocks, stock]);
+
+    dispatch({ stock, type: ADD_STOCK } as AddStockAction);
   };
 
   useEffect(() => {
