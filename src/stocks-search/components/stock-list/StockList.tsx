@@ -3,13 +3,18 @@ import { Table, Button } from "react-bootstrap";
 import styles from "./StockList.module.scss";
 import { StockPrice } from "../../../businessLogic/stockPrice";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../shared/rootState";
 
 interface IStockListProps {
-  items: StockPrice[];
+  //items: StockPrice[];
 }
 
 const StockList: React.FC<IStockListProps> = (props) => {
   const router = useHistory();
+  const items = useSelector<RootState, StockPrice[]>(
+    (state) => state.stocksState.allStocks
+  );
 
   const buy = (symbol: string) => {
     console.log(`Buying stock ${symbol}`);
@@ -20,7 +25,7 @@ const StockList: React.FC<IStockListProps> = (props) => {
     console.log(`Selling stock ${symbol}`);
   };
 
-  const stockItems = props.items.map((stock) => (
+  const stockItems = items.map((stock) => (
     <tr key={stock.symbol}>
       <td>{stock.symbol}</td>
       <td>{stock.name}</td>

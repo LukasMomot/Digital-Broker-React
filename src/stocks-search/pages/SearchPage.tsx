@@ -9,7 +9,7 @@ import {
 import SearchBar from "../components/search-bar/SearchBar";
 import StockList from "../components/stock-list/StockList";
 import { useDispatch } from "react-redux";
-import { addStock } from "../components/redux/actions";
+import { addStock, mostTradedFetched } from "../redux/actions";
 
 const SearchPage: React.FC = () => {
   const [stocks, setStocks] = useState<StockPrice[]>([]);
@@ -26,6 +26,7 @@ const SearchPage: React.FC = () => {
   useEffect(() => {
     (async () => {
       let mostTraded = await fetchMostTraded();
+      dispatch(mostTradedFetched(mostTraded));
       setStocks(mostTraded);
     })();
   }, []);
@@ -34,7 +35,7 @@ const SearchPage: React.FC = () => {
     <div>
       <h1 className={styles.heading}>Digital Broker React</h1>
       <SearchBar onTermChanged={(term) => search(term)}></SearchBar>
-      <StockList items={stocks}></StockList>
+      <StockList></StockList>
     </div>
   );
 };

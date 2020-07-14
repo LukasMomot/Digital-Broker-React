@@ -1,13 +1,13 @@
-import { StockPrice } from "./../../../businessLogic/stockPrice";
+import { StockPrice } from "../../businessLogic/stockPrice";
 
 export interface StocksState {
-  mostTradedStock: StockPrice[];
+  mostTradedStocks: StockPrice[];
   userAddedStocks: StockPrice[];
   allStocks: StockPrice[];
 }
 
 export const initialState: StocksState = {
-  mostTradedStock: [],
+  mostTradedStocks: [],
   userAddedStocks: [],
   allStocks: [],
 };
