@@ -1,7 +1,7 @@
 import { StockPrice } from "./stockPrice";
 import { http } from "./http";
 
-export async function fetchMostTraded(): Promise<StockPrice[]> {
+export async function fetchMostTradedApi(): Promise<StockPrice[]> {
   const mostTradedMocked: StockPrice[] = [
     { symbol: "AAPL", name: "Apple", price: 100 },
     { symbol: "MSFT", name: "Microsoft", price: 65.56 },
