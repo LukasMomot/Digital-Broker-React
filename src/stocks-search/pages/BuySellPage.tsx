@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { fetchStockPrice } from "../../businessLogic/stocksService";
+import { fetchStockPriceApi } from "../../businessLogic/stocksApi";
 import { useEffect, useState } from "react";
 import { StockPrice } from "../../businessLogic/stockPrice";
 import { useFormik } from "formik";
@@ -38,7 +38,7 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
   const onCancel = () => router.goBack();
 
   useEffect(() => {
-    fetchStockPrice(symbol).then((stock) => {
+    fetchStockPriceApi(symbol).then((stock) => {
       setStock(stock);
       formik.setFieldValue("currentPrice", stock?.price);
       formik.setFieldValue("limitOrder", (stock?.price * 1.02).toFixed(2));

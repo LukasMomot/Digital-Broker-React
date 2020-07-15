@@ -11,23 +11,22 @@ export const stocskReducer: Reducer<StocksState> = (
   state = initialState,
   action
 ) => {
+  console.log(action);
   switch (action.type) {
     case ADD_STOCK:
-      console.log(action);
       return {
         ...state,
         userAddedStocks: [
           ...state.userAddedStocks,
-          (action as AddStockAction).payload.stock,
+          (action as AddStockAction).payload,
         ],
         allStocks: [
           ...state.mostTradedStocks,
           ...state.userAddedStocks,
-          (action as AddStockAction).payload.stock,
+          (action as AddStockAction).payload,
         ],
       };
     case MOSTTRADED_FETCHED:
-      console.log("Most Traded fetched");
       return {
         ...state,
         mostTradedStocks: [
