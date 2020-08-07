@@ -21,9 +21,12 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
   const { symbol } = useParams();
   const [stock, setStock] = useState<StockPrice>();
   const router = useHistory();
-  const validationSchema = Yup.object().shape({
+  const validationSchema = Yup.object().shape<Partial<BuyAndSellModel>>({
     amountOfStocks: Yup.number()
       .min(1, 'You need to buy and least one stock')
+      .required('Field is required'),
+    limitOrder: Yup.number()
+      .moreThan(0, 'Your limit should be greater than 0')
       .required('Field is required')
   });
 
@@ -115,7 +118,7 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
               onBlur={formik.handleBlur}
               value={formik.values.amountOfStocks}
             ></Form.Control>
-            {formik.errors.amountOfStocks && formik.touched.amountOfStocks && <div>{formik.errors.amountOfStocks}</div>}
+            {formik.errors.amountOfStocks && formik.touched.amountOfStocks && <div className={styles.error}>{formik.errors.amountOfStocks}</div>}
           </Col>
         </Form.Group>
 
@@ -128,8 +131,10 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
               id="limitOrder"
               type="number"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.limitOrder}
             ></Form.Control>
+            {formik.errors.limitOrder && formik.touched.limitOrder && <div className={styles.error} >{formik.errors.limitOrder}</div>}
           </Col>
         </Form.Group>
 
