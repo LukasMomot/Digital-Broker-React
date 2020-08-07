@@ -6,8 +6,9 @@ import { StockPrice } from "../../businessLogic/stockPrice";
 import { useFormik } from "formik";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import styles from "./BuySellPage.module.scss";
+import * as Yup from 'yup';
 
-interface IBuySellPageProps {}
+interface IBuySellPageProps { }
 
 interface BuyAndSellModel {
   name: string;
@@ -20,6 +21,11 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
   const { symbol } = useParams();
   const [stock, setStock] = useState<StockPrice>();
   const router = useHistory();
+  const validationSchema = Yup.object().shape({
+    amountOfStocks: Yup.number()
+      .min(1, 'You need to buy and least one stock')
+      .required('Field is required')
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -33,6 +39,7 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
       console.log(JSON.stringify(values, null, 2));
       router.push("/");
     },
+    validationSchema: validationSchema,
   });
 
   const onCancel = () => router.goBack();
@@ -105,8 +112,10 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
               id="amountOfStocks"
               type="number"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.amountOfStocks}
             ></Form.Control>
+            {formik.errors.amountOfStocks && formik.touched.amountOfStocks && <div>{formik.errors.amountOfStocks}</div>}
           </Col>
         </Form.Group>
 
@@ -126,7 +135,7 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
 
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button variant="success" type="submit">
+            <Button disabled={!formik.isValid} variant="success" type="submit">
               Buy
             </Button>
             <Button
