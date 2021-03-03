@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import styles from "./BuySellPage.module.scss";
 import * as Yup from 'yup';
+import { toast } from "react-toastify";
 
 interface IBuySellPageProps { }
 
@@ -18,7 +19,7 @@ interface BuyAndSellModel {
 }
 
 const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
-  const { symbol } = useParams();
+  const { symbol } = useParams<{symbol: string}>();
   const [stock, setStock] = useState<StockPrice>();
   const router = useHistory();
   const validationSchema = Yup.object().shape<Partial<BuyAndSellModel>>({
@@ -40,6 +41,15 @@ const BuySellPage: React.FunctionComponent<IBuySellPageProps> = (props) => {
     },
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
+      toast.success('🚀 Wow you bought a stock. Congratulations!!!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
       router.push("/");
     },
     validationSchema: validationSchema,
